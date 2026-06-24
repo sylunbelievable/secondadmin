@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '#/com
 import { Field, FieldError, FieldLabel } from '#/components/ui/field'
 import { Input } from '#/components/ui/input'
 import { authKeys } from '#/lib/auth'
+import { getOrCreateDeviceId } from '#/lib/uuid'
 
 const schema = z.object({
   username: z.string().min(1, '请输入用户名'),
@@ -29,7 +30,7 @@ export function LoginForm() {
         body: {
           ...values,
           authMode: 'cookie',
-          deviceId: localStorage.deviceId ||= crypto.randomUUID(),
+          deviceId: getOrCreateDeviceId(),
         },
         throwOnError: true,
       }))
