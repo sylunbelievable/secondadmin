@@ -26,7 +26,7 @@ describe('API client authentication', () => {
       if (path === '/api/v1/auth/me' && !refreshed) {
         return Response.json({ code: 'UNAUTHORIZED', message: 'expired', requestId: 'test' }, { status: 401 })
       }
-      return Response.json({ id: 1, username: 'admin', nickname: 'Administrator', status: 1 })
+      return Response.json({ id: '1', username: 'admin', nickname: 'Administrator', status: 1 })
     }))
 
     const users = await Promise.all([
@@ -47,7 +47,7 @@ describe('API client authentication', () => {
     })
     vi.stubGlobal('fetch', fetchMock)
 
-    await updateUser({ path: { id: 1 }, body: { status: 1 }, throwOnError: true })
+    await updateUser({ path: { id: '1' }, body: { status: 1 }, throwOnError: true })
 
     expect(fetchMock).toHaveBeenCalledOnce()
   })

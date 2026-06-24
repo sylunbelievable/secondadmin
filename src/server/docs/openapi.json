@@ -130,8 +130,7 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           "username": {
             "type": "string"
@@ -228,8 +227,8 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "code": {
             "type": "string"
@@ -283,8 +282,8 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "group": {
             "type": "string"
@@ -331,8 +330,8 @@
           "ids": {
             "type": "array",
             "items": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "pattern": "^[0-9]+$"
             }
           }
         }
@@ -347,7 +346,8 @@
         ],
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "deviceId": {
             "type": "string"
@@ -374,12 +374,12 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "parentId": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "type": {
             "type": "string",
@@ -434,8 +434,8 @@
         ],
         "properties": {
           "parentId": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "type": {
             "type": "string",
@@ -506,8 +506,8 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "code": {
             "type": "string"
@@ -554,12 +554,12 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "dictionaryId": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "label": {
             "type": "string"
@@ -617,12 +617,12 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "userId": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "requestId": {
             "type": "string"
@@ -685,12 +685,12 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "userId": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           },
           "username": {
             "type": "string"
@@ -1074,8 +1074,8 @@
           "in": "path",
           "required": true,
           "schema": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           }
         }
       ],
@@ -1172,8 +1172,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "pattern": "^[0-9]+$"
             }
           },
           {
@@ -1270,8 +1270,8 @@
           "in": "path",
           "required": true,
           "schema": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           }
         }
       ],
@@ -1345,8 +1345,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "pattern": "^[0-9]+$"
             }
           },
           {
@@ -1443,8 +1443,8 @@
           "in": "path",
           "required": true,
           "schema": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           }
         }
       ],
@@ -1599,8 +1599,8 @@
           "in": "path",
           "required": true,
           "schema": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           }
         }
       ],
@@ -1677,8 +1677,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "pattern": "^[0-9]+$"
             }
           },
           {
@@ -1775,8 +1775,8 @@
           "in": "path",
           "required": true,
           "schema": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           }
         }
       ],
@@ -1853,8 +1853,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "pattern": "^[0-9]+$"
             }
           },
           {
@@ -1930,8 +1930,8 @@
           "in": "path",
           "required": true,
           "schema": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "pattern": "^[0-9]+$"
           }
         }
       ],

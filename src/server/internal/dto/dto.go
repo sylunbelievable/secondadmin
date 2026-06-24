@@ -1,6 +1,11 @@
 package dto
 
-import "time"
+import (
+	"encoding/json"
+	"strconv"
+	"strings"
+	"time"
+)
 
 type LoginRequest struct {
 	Username string `json:"username"`
@@ -21,7 +26,7 @@ type Tokens struct {
 }
 
 type User struct {
-	ID       uint64 `json:"id"`
+	ID       uint64 `json:"id,string"`
 	Username string `json:"username"`
 	Nickname string `json:"nickname"`
 	Status   int16  `json:"status"`
@@ -40,7 +45,7 @@ type UpdateUserRequest struct {
 }
 
 type Role struct {
-	ID     uint64 `json:"id"`
+	ID     uint64 `json:"id,string"`
 	Code   string `json:"code"`
 	Name   string `json:"name"`
 	Status int16  `json:"status"`
@@ -57,7 +62,7 @@ type UpdateRoleRequest struct {
 }
 
 type API struct {
-	ID     uint64 `json:"id"`
+	ID     uint64 `json:"id,string"`
 	Group  string `json:"group"`
 	Name   string `json:"name"`
 	Path   string `json:"path"`
@@ -71,8 +76,33 @@ type CreateAPIRequest struct {
 	Method string `json:"method"`
 }
 
+type IDList []uint64
+
+func (ids *IDList) UnmarshalJSON(data []byte) error {
+	var text []string
+	if err := json.Unmarshal(data, &text); err == nil {
+		out := make([]uint64, 0, len(text))
+		for _, item := range text {
+			id, err := strconv.ParseUint(strings.TrimSpace(item), 10, 64)
+			if err != nil {
+				return err
+			}
+			out = append(out, id)
+		}
+		*ids = out
+		return nil
+	}
+
+	var numbers []uint64
+	if err := json.Unmarshal(data, &numbers); err != nil {
+		return err
+	}
+	*ids = numbers
+	return nil
+}
+
 type IDsRequest struct {
-	IDs []uint64 `json:"ids"`
+	IDs IDList `json:"ids"`
 }
 
 type Session struct {

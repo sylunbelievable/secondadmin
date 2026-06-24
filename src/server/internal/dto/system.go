@@ -3,8 +3,8 @@ package dto
 import "time"
 
 type Menu struct {
-	ID         uint64  `json:"id"`
-	ParentID   uint64  `json:"parentId"`
+	ID         uint64  `json:"id,string"`
+	ParentID   uint64  `json:"parentId,string"`
 	Type       string  `json:"type"`
 	Name       string  `json:"name"`
 	Path       string  `json:"path,omitempty"`
@@ -18,7 +18,7 @@ type Menu struct {
 }
 
 type MenuRequest struct {
-	ParentID   uint64  `json:"parentId"`
+	ParentID   uint64  `json:"parentId,string"`
 	Type       string  `json:"type"`
 	Name       string  `json:"name"`
 	Path       string  `json:"path"`
@@ -36,7 +36,7 @@ type CurrentMenus struct {
 }
 
 type Dictionary struct {
-	ID     uint64 `json:"id"`
+	ID     uint64 `json:"id,string"`
 	Code   string `json:"code"`
 	Name   string `json:"name"`
 	Status int16  `json:"status"`
@@ -49,8 +49,8 @@ type DictionaryRequest struct {
 }
 
 type DictionaryItem struct {
-	ID           uint64 `json:"id"`
-	DictionaryID uint64 `json:"dictionaryId"`
+	ID           uint64 `json:"id,string"`
+	DictionaryID uint64 `json:"dictionaryId,string"`
 	Label        string `json:"label"`
 	Value        string `json:"value"`
 	Sort         int    `json:"sort"`
@@ -65,8 +65,8 @@ type DictionaryItemRequest struct {
 }
 
 type OperationLog struct {
-	ID         uint64    `json:"id"`
-	UserID     uint64    `json:"userId"`
+	ID         uint64    `json:"id,string"`
+	UserID     uint64    `json:"userId,string"`
 	RequestID  string    `json:"requestId"`
 	Method     string    `json:"method"`
 	Path       string    `json:"path"`
@@ -78,8 +78,8 @@ type OperationLog struct {
 }
 
 type LoginLog struct {
-	ID        uint64    `json:"id"`
-	UserID    *uint64   `json:"userId,omitempty"`
+	ID        uint64    `json:"id,string"`
+	UserID    *uint64   `json:"userId,omitempty,string"`
 	Username  string    `json:"username"`
 	Event     string    `json:"event"`
 	Success   bool      `json:"success"`

@@ -68,11 +68,11 @@ export function DictionariesPage() {
   const dictionaries = useQuery(adminQueries.dictionaries())
   const items = useQuery(adminQueries.dictionaryItems(selected?.code ?? ''))
   const removeDictionary = useMutation({
-    mutationFn: (id: number) => deleteDictionary({ path: { id }, throwOnError: true }),
+    mutationFn: (id: string) => deleteDictionary({ path: { id }, throwOnError: true }),
     onSuccess: async () => { setSelected(undefined); await client.invalidateQueries({ queryKey: adminKeys.dictionaries }) },
   })
   const removeItem = useMutation({
-    mutationFn: (id: number) => deleteDictionaryItem({ path: { id }, throwOnError: true }),
+    mutationFn: (id: string) => deleteDictionaryItem({ path: { id }, throwOnError: true }),
     onSuccess: () => selected && client.invalidateQueries({ queryKey: adminKeys.dictionaryItems(selected.code) }),
   })
   const mayCreate = usePermission('system:dictionary:create')

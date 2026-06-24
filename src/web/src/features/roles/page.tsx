@@ -55,12 +55,12 @@ export function RolesPage() {
     onError: (error) => form.setError('root', { message: errorMessage(error) }),
   })
   const remove = useMutation({
-    mutationFn: (id: number) => deleteRole({ path: { id }, throwOnError: true }),
+    mutationFn: (id: string) => deleteRole({ path: { id }, throwOnError: true }),
     onSuccess: () => Promise.all([client.invalidateQueries({ queryKey: adminKeys.roles }), client.invalidateQueries({ queryKey: authKeys.menus })]),
   })
-  const assignAPIs = useMutation({ mutationFn: ({ id, ids }: { id: number; ids: number[] }) => setRoleApis({ path: { id }, body: { ids }, throwOnError: true }) })
+  const assignAPIs = useMutation({ mutationFn: ({ id, ids }: { id: string; ids: string[] }) => setRoleApis({ path: { id }, body: { ids }, throwOnError: true }) })
   const assignMenus = useMutation({
-    mutationFn: ({ id, ids }: { id: number; ids: number[] }) => setRoleMenus({ path: { id }, body: { ids }, throwOnError: true }),
+    mutationFn: ({ id, ids }: { id: string; ids: string[] }) => setRoleMenus({ path: { id }, body: { ids }, throwOnError: true }),
     onSuccess: () => client.invalidateQueries({ queryKey: authKeys.menus }),
   })
   const mayCreate = usePermission('system:role:create')

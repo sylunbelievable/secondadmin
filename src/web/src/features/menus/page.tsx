@@ -16,7 +16,7 @@ import { ConfirmButton, DataTable, ErrorAlert, PageHeader, QueryState, usePermis
 import { authKeys } from '#/lib/auth'
 
 const schema = z.object({
-  parentId: z.number().int().min(0),
+  parentId: z.string().trim().regex(/^\d+$/, '请输入数字 ID'),
   type: z.enum(['directory', 'menu', 'button']),
   name: z.string().trim().min(1, '请输入名称'),
   path: z.string(),
@@ -29,7 +29,7 @@ const schema = z.object({
 })
 type Form = z.infer<typeof schema>
 
-const defaults: Form = { parentId: 0, type: 'menu', name: '', path: '', component: '', icon: '', permission: '', sort: 0, visible: 'true', status: '1' }
+const defaults: Form = { parentId: '0', type: 'menu', name: '', path: '', component: '', icon: '', permission: '', sort: 0, visible: 'true', status: '1' }
 
 function menuValues(menu: Menu): Form {
   return {
@@ -73,7 +73,7 @@ function MenuForm({ menu, trigger }: { menu?: Menu; trigger?: ReactNode }) {
   })
   const fields = (
     <form className="grid gap-4 md:grid-cols-4" onSubmit={form.handleSubmit((values) => mutation.mutate(values))}>
-      <Field><FieldLabel htmlFor={`menu-parent-${menu?.id ?? 'new'}`}>父 ID</FieldLabel><Input id={`menu-parent-${menu?.id ?? 'new'}`} type="number" {...form.register('parentId', { valueAsNumber: true })} /></Field>
+      <Field data-invalid={!!form.formState.errors.parentId}><FieldLabel htmlFor={`menu-parent-${menu?.id ?? 'new'}`}>父 ID</FieldLabel><Input id={`menu-parent-${menu?.id ?? 'new'}`} inputMode="numeric" {...form.register('parentId')} /><FieldError errors={[form.formState.errors.parentId]} /></Field>
       <Controller name="type" control={form.control} render={({ field }) => <Field><FieldLabel>类型</FieldLabel><Select value={field.value} onValueChange={field.onChange}><SelectTrigger className="w-full"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="directory">目录</SelectItem><SelectItem value="menu">页面</SelectItem><SelectItem value="button">按钮</SelectItem></SelectContent></Select></Field>} />
       <Field data-invalid={!!form.formState.errors.name}><FieldLabel htmlFor={`menu-name-${menu?.id ?? 'new'}`}>名称</FieldLabel><Input id={`menu-name-${menu?.id ?? 'new'}`} {...form.register('name')} /><FieldError errors={[form.formState.errors.name]} /></Field>
       <Field><FieldLabel htmlFor={`menu-sort-${menu?.id ?? 'new'}`}>排序</FieldLabel><Input id={`menu-sort-${menu?.id ?? 'new'}`} type="number" {...form.register('sort', { valueAsNumber: true })} /></Field>
@@ -99,7 +99,7 @@ export function MenusPage() {
   const client = useQueryClient()
   const query = useQuery(adminQueries.menus())
   const remove = useMutation({
-    mutationFn: (id: number) => deleteMenu({ path: { id }, throwOnError: true }),
+    mutationFn: (id: string) => deleteMenu({ path: { id }, throwOnError: true }),
     onSuccess: () => Promise.all([
       client.invalidateQueries({ queryKey: adminKeys.menus }),
       client.invalidateQueries({ queryKey: authKeys.menus }),

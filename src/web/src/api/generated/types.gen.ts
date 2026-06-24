@@ -25,7 +25,7 @@ export type Tokens = {
 };
 
 export type User = {
-    id: number;
+    id: string;
     username: string;
     nickname: string;
     status: number;
@@ -54,7 +54,7 @@ export type UserPage = {
 };
 
 export type Role = {
-    id: number;
+    id: string;
     code: string;
     name: string;
     status: number;
@@ -71,7 +71,7 @@ export type UpdateRoleRequest = {
 };
 
 export type Api = {
-    id: number;
+    id: string;
     group: string;
     name: string;
     path: string;
@@ -86,7 +86,7 @@ export type CreateApiRequest = {
 };
 
 export type IdsRequest = {
-    ids: Array<number>;
+    ids: Array<string>;
 };
 
 export type Session = {
@@ -97,8 +97,8 @@ export type Session = {
 };
 
 export type Menu = {
-    id: number;
-    parentId: number;
+    id: string;
+    parentId: string;
     type: 'directory' | 'menu' | 'button';
     name: string;
     path?: string;
@@ -112,7 +112,7 @@ export type Menu = {
 };
 
 export type MenuRequest = {
-    parentId: number;
+    parentId: string;
     type: 'directory' | 'menu' | 'button';
     name: string;
     path: string;
@@ -130,7 +130,7 @@ export type CurrentMenus = {
 };
 
 export type Dictionary = {
-    id: number;
+    id: string;
     code: string;
     name: string;
     status: number;
@@ -143,8 +143,8 @@ export type DictionaryRequest = {
 };
 
 export type DictionaryItem = {
-    id: number;
-    dictionaryId: number;
+    id: string;
+    dictionaryId: string;
     label: string;
     value: string;
     sort: number;
@@ -159,8 +159,8 @@ export type DictionaryItemRequest = {
 };
 
 export type OperationLog = {
-    id: number;
-    userId: number;
+    id: string;
+    userId: string;
     requestId: string;
     method: string;
     path: string;
@@ -177,8 +177,8 @@ export type OperationLogPage = {
 };
 
 export type LoginLog = {
-    id: number;
-    userId?: number;
+    id: string;
+    userId?: string;
     username: string;
     event: string;
     success: boolean;
@@ -483,7 +483,7 @@ export type DisableUserData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/users/{id}';
@@ -501,7 +501,7 @@ export type DisableUserResponse = DisableUserResponses[keyof DisableUserResponse
 export type GetUserData = {
     body?: never;
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/users/{id}';
@@ -525,7 +525,7 @@ export type UpdateUserData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/users/{id}';
@@ -549,7 +549,7 @@ export type SetUserRolesData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/users/{id}/roles';
@@ -611,7 +611,7 @@ export type DeleteRoleData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/roles/{id}';
@@ -635,7 +635,7 @@ export type UpdateRoleData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/roles/{id}';
@@ -659,7 +659,7 @@ export type SetRoleApisData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/roles/{id}/apis';
@@ -721,7 +721,7 @@ export type DeleteApiData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/apis/{id}';
@@ -745,7 +745,7 @@ export type UpdateApiData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/apis/{id}';
@@ -823,7 +823,7 @@ export type DeleteMenuData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/menus/{id}';
@@ -856,7 +856,7 @@ export type UpdateMenuData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/menus/{id}';
@@ -880,7 +880,7 @@ export type SetRoleMenusData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/roles/{id}/menus';
@@ -942,7 +942,7 @@ export type DeleteDictionaryData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/dictionaries/{id}';
@@ -975,7 +975,7 @@ export type UpdateDictionaryData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/dictionaries/{id}';
@@ -999,7 +999,7 @@ export type CreateDictionaryItemData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/dictionaries/{id}/items';
@@ -1041,7 +1041,7 @@ export type DeleteDictionaryItemData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/dictionary-items/{id}';
@@ -1065,7 +1065,7 @@ export type UpdateDictionaryItemData = {
         'X-CSRF-Token'?: string;
     };
     path: {
-        id: number;
+        id: string;
     };
     query?: never;
     url: '/api/v1/dictionary-items/{id}';

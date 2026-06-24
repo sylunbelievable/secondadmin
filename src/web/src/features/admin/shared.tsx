@@ -188,13 +188,13 @@ export function IDsDialog({
   description: string
   trigger: ReactNode
   pending: boolean
-  onSubmit: (ids: number[]) => Promise<void>
+  onSubmit: (ids: string[]) => Promise<void>
 }) {
   const [open, setOpen] = useState(false)
   const form = useForm<IDsForm>({ resolver: zodResolver(idsSchema), defaultValues: { ids: '' } })
   const submit = form.handleSubmit(async ({ ids }) => {
     try {
-      await onSubmit(ids ? ids.split(',').map((id) => Number(id.trim())) : [])
+      await onSubmit(ids ? ids.split(',').map((id) => id.trim()) : [])
       setOpen(false)
       form.reset()
     } catch (error) {

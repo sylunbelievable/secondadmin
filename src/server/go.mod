@@ -3,6 +3,7 @@ module github.com/sylunbelievable/secondadmin/server
 go 1.26
 
 require (
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/casbin/casbin/v3 v3.9.0
 	github.com/casbin/gorm-adapter/v3 v3.41.0
 	github.com/casbin/redis-watcher/v2 v2.8.0
@@ -16,6 +17,7 @@ require (
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.31.1
+	gorm.io/plugin/dbresolver v1.6.2
 )
 
 require (
@@ -28,7 +30,6 @@ require (
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/bmatcuk/doublestar/v4 v4.9.1 // indirect
-	github.com/bwmarrin/snowflake v0.3.0 // indirect
 	github.com/casbin/govaluate v1.10.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -96,7 +97,6 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/driver/sqlserver v1.6.3 // indirect
-	gorm.io/plugin/dbresolver v1.6.2 // indirect
 	modernc.org/libc v1.67.4 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect

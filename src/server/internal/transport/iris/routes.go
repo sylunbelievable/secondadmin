@@ -218,7 +218,7 @@ func setUserRoles(s *service.Services) iris.Handler {
 			writeError(ctx, service.ErrInvalidInput)
 			return
 		}
-		if err := s.SetUserRoles(ctx.Request().Context(), ctx.Params().GetUint64Default("id", 0), req.IDs); err != nil {
+		if err := s.SetUserRoles(ctx.Request().Context(), ctx.Params().GetUint64Default("id", 0), []uint64(req.IDs)); err != nil {
 			writeError(ctx, err)
 			return
 		}
@@ -286,7 +286,7 @@ func setRoleAPIs(s *service.Services) iris.Handler {
 			writeError(ctx, service.ErrInvalidInput)
 			return
 		}
-		if err := s.SetRoleAPIs(ctx.Request().Context(), ctx.Params().GetUint64Default("id", 0), req.IDs); err != nil {
+		if err := s.SetRoleAPIs(ctx.Request().Context(), ctx.Params().GetUint64Default("id", 0), []uint64(req.IDs)); err != nil {
 			writeError(ctx, err)
 			return
 		}

@@ -80,13 +80,13 @@ export function UsersPage() {
     onError: (error) => form.setError('root', { message: errorMessage(error) }),
   })
   const update = useMutation({
-    mutationFn: ({ id, status }: { id: number; status: 0 | 1 }) => updateUser({
+    mutationFn: ({ id, status }: { id: string; status: 0 | 1 }) => updateUser({
       path: { id }, body: { status }, throwOnError: true,
     }),
     onSuccess: () => client.invalidateQueries({ queryKey: adminKeys.usersAll }),
   })
   const assign = useMutation({
-    mutationFn: ({ id, ids }: { id: number; ids: number[] }) => setUserRoles({
+    mutationFn: ({ id, ids }: { id: string; ids: string[] }) => setUserRoles({
       path: { id }, body: { ids }, throwOnError: true,
     }),
     onSuccess: () => client.invalidateQueries({ queryKey: authKeys.menus }),

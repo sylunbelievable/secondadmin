@@ -3,16 +3,16 @@ import type { Menu } from '#/api'
 import { containsPath, routeFor, routeTitle } from './app-shell'
 
 const tree: Menu[] = [{
-  id: 1,
-  parentId: 0,
+  id: '1',
+  parentId: '0',
   type: 'directory',
   name: '系统管理',
   sort: 1,
   visible: true,
   status: 1,
   children: [{
-    id: 2,
-    parentId: 1,
+    id: '2',
+    parentId: '1',
     type: 'menu',
     name: '用户管理',
     component: 'users',

@@ -150,7 +150,7 @@ function Navigation({ menus }: { menus: Menu[] }) {
           <SidebarLabel className="font-semibold">Second Admin</SidebarLabel>
         </Link>
         <nav className="grid gap-1">
-          <NavLink item={{ id: 0, parentId: 0, type: 'menu', name: '概览', component: 'dashboard', sort: 0, visible: true, status: 1 }} />
+          <NavLink item={{ id: '0', parentId: '0', type: 'menu', name: '概览', component: 'dashboard', sort: 0, visible: true, status: 1 }} />
           <NavItems items={menus} pathname={pathname} />
         </nav>
       </div>

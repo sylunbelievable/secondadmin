@@ -95,7 +95,7 @@ func setRoleMenus(s *service.Services) iris.Handler {
 			writeError(ctx, service.ErrInvalidInput)
 			return
 		}
-		if err := s.SetRoleMenus(ctx.Request().Context(), ctx.Params().GetUint64Default("id", 0), req.IDs); err != nil {
+		if err := s.SetRoleMenus(ctx.Request().Context(), ctx.Params().GetUint64Default("id", 0), []uint64(req.IDs)); err != nil {
 			writeError(ctx, err)
 			return
 		}

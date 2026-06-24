@@ -20,7 +20,7 @@ const schema = z.object({
 })
 type Form = z.infer<typeof schema>
 
-function APIForm({ id, values, trigger }: { id?: number; values?: Form; trigger?: React.ReactNode }) {
+function APIForm({ id, values, trigger }: { id?: string; values?: Form; trigger?: React.ReactNode }) {
   const [open, setOpen] = useState(false)
   const client = useQueryClient()
   const form = useForm<Form>({ resolver: zodResolver(schema), values: values ?? { group: '', name: '', path: '', method: 'GET' } })
@@ -59,7 +59,7 @@ export function APIsPage() {
   const client = useQueryClient()
   const query = useQuery(adminQueries.apis())
   const remove = useMutation({
-    mutationFn: (id: number) => deleteApi({ path: { id }, throwOnError: true }),
+    mutationFn: (id: string) => deleteApi({ path: { id }, throwOnError: true }),
     onSuccess: () => client.invalidateQueries({ queryKey: adminKeys.apis }),
   })
   const mayCreate = usePermission('system:api:create')
