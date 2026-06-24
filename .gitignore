@@ -1,0 +1,13 @@
+.env
+*.log
+.DS_Store
+.idea/
+node_modules/
+dist/
+.tmp/
+.cache/
+src/server/bin/
+src/server/coverage.out
+deploy/.env.staging
+deploy/.env.prod
+backups/

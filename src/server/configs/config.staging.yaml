@@ -1,0 +1,25 @@
+http:
+  addr: :8080
+  shutdownTimeout: 15s
+database:
+  driver: postgres
+  readWrite:
+    enabled: false
+    writerDsn: ""
+    readerDsns: []
+  maxOpenConnections: 50
+  maxIdleConnections: 10
+  connectionMaxLifetime: 30m
+redis:
+  database: 0
+log:
+  level: info
+  format: json
+auth:
+  accessTokenTTL: 15m
+  refreshTokenTTL: 168h
+  maxDevices: 5
+  cookie:
+    secure: true
+    sameSite: lax
+  corsOrigins: []

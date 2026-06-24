@@ -1,0 +1,86 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: secondadmin
+      POSTGRES_USER: secondadmin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U secondadmin -d secondadmin"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD:?set REDIS_PASSWORD}"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" ping | grep PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+
+  api:
+    image: ${API_IMAGE:-secondadmin-api}:${IMAGE_TAG:-latest}
+    build:
+      context: ../src/server
+    restart: unless-stopped
+    environment:
+      APP_ENV: ${APP_ENV}
+      DB_DRIVER: postgres
+      DB_DSN: postgres://secondadmin:${POSTGRES_PASSWORD}@postgres:5432/secondadmin?sslmode=disable
+      DB_READ_WRITE_ENABLED: ${DB_READ_WRITE_ENABLED:-false}
+      DB_WRITER_DSN: ${DB_WRITER_DSN:-}
+      DB_READER_DSNS: ${DB_READER_DSNS:-}
+      REDIS_ADDR: redis:6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      COOKIE_SECURE: "true"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  web:
+    image: ${WEB_IMAGE:-secondadmin-web}:${IMAGE_TAG:-latest}
+    build:
+      context: ../src/web
+      args:
+        VITE_API_URL: ""
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+
+  gateway:
+    image: nginx:1.29-alpine
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  postgres_data:
+  redis_data:

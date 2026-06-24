@@ -1,0 +1,16 @@
+-- +goose Up
+CREATE TABLE casbin_rule (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ptype VARCHAR(100) NOT NULL DEFAULT '',
+    v0 VARCHAR(100) NOT NULL DEFAULT '',
+    v1 VARCHAR(100) NOT NULL DEFAULT '',
+    v2 VARCHAR(100) NOT NULL DEFAULT '',
+    v3 VARCHAR(100) NOT NULL DEFAULT '',
+    v4 VARCHAR(100) NOT NULL DEFAULT '',
+    v5 VARCHAR(100) NOT NULL DEFAULT '',
+    UNIQUE KEY idx_casbin_rule (ptype, v0, v1, v2, v3, v4, v5)
+) ENGINE=InnoDB;
+
+-- +goose Down
+DROP TABLE casbin_rule;
+
