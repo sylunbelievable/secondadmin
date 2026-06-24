@@ -17,6 +17,7 @@ type Config struct {
 	Database    Database `mapstructure:"database"`
 	Redis       Redis    `mapstructure:"redis"`
 	Log         Log      `mapstructure:"log"`
+	ID          ID       `mapstructure:"id"`
 	Auth        Auth     `mapstructure:"auth"`
 }
 
@@ -49,6 +50,10 @@ type Redis struct {
 type Log struct {
 	Level  string `mapstructure:"level"`
 	Format string `mapstructure:"format"`
+}
+
+type ID struct {
+	WorkerID int `mapstructure:"workerId"`
 }
 
 type Auth struct {
@@ -87,6 +92,7 @@ func Load() (Config, error) {
 		"database.readWrite.writerDsn": "DB_WRITER_DSN",
 		"redis.addr":                   "REDIS_ADDR",
 		"redis.password":               "REDIS_PASSWORD",
+		"id.workerId":                  "ID_WORKER_ID",
 		"auth.jwtSecret":               "JWT_SECRET",
 		"auth.maxDevices":              "AUTH_MAX_DEVICES",
 		"auth.cookie.secure":           "COOKIE_SECURE",
@@ -131,6 +137,8 @@ func (c Config) Validate() error {
 		return errors.New("token TTLs must be positive")
 	case c.Auth.MaxDevices < 0:
 		return errors.New("auth.maxDevices cannot be negative")
+	case c.ID.WorkerID < 0 || c.ID.WorkerID > 1023:
+		return errors.New("id.workerId must be between 0 and 1023")
 	}
 
 	if c.Environment == "staging" || c.Environment == "prod" {

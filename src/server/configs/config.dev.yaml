@@ -16,6 +16,8 @@ redis:
 log:
   level: debug
   format: console
+id:
+  workerId: 0
 auth:
   accessTokenTTL: 15m
   refreshTokenTTL: 168h

@@ -1,6 +1,6 @@
 -- +goose Up
 CREATE TABLE sys_menus (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     parent_id BIGINT NOT NULL DEFAULT 0,
     type VARCHAR(16) NOT NULL,
     name VARCHAR(100) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE sys_role_menus (
 );
 
 CREATE TABLE sys_dictionaries (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     code VARCHAR(64) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     status SMALLINT NOT NULL DEFAULT 1,
@@ -33,7 +33,7 @@ CREATE TABLE sys_dictionaries (
 );
 
 CREATE TABLE sys_dictionary_items (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     dictionary_id BIGINT NOT NULL REFERENCES sys_dictionaries(id) ON DELETE CASCADE,
     label VARCHAR(100) NOT NULL,
     value VARCHAR(255) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE sys_dictionary_items (
 );
 
 CREATE TABLE sys_operation_logs (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     user_id BIGINT NOT NULL,
     request_id VARCHAR(64) NOT NULL,
     method VARCHAR(10) NOT NULL,
@@ -65,4 +65,3 @@ DROP TABLE sys_dictionary_items;
 DROP TABLE sys_dictionaries;
 DROP TABLE sys_role_menus;
 DROP TABLE sys_menus;
-

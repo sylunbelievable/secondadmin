@@ -1,9 +1,13 @@
 package entity
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Menu struct {
-	ID         uint64 `gorm:"primaryKey"`
+	ID         uint64 `gorm:"primaryKey;autoIncrement:false"`
 	ParentID   uint64
 	Type       string
 	Name       string
@@ -20,6 +24,8 @@ type Menu struct {
 
 func (Menu) TableName() string { return "sys_menus" }
 
+func (m *Menu) BeforeCreate(*gorm.DB) error { return assignID(&m.ID) }
+
 type RoleMenu struct {
 	RoleID uint64 `gorm:"primaryKey"`
 	MenuID uint64 `gorm:"primaryKey"`
@@ -28,7 +34,7 @@ type RoleMenu struct {
 func (RoleMenu) TableName() string { return "sys_role_menus" }
 
 type Dictionary struct {
-	ID        uint64 `gorm:"primaryKey"`
+	ID        uint64 `gorm:"primaryKey;autoIncrement:false"`
 	Code      string
 	Name      string
 	Status    int16
@@ -38,8 +44,10 @@ type Dictionary struct {
 
 func (Dictionary) TableName() string { return "sys_dictionaries" }
 
+func (d *Dictionary) BeforeCreate(*gorm.DB) error { return assignID(&d.ID) }
+
 type DictionaryItem struct {
-	ID           uint64 `gorm:"primaryKey"`
+	ID           uint64 `gorm:"primaryKey;autoIncrement:false"`
 	DictionaryID uint64
 	Label        string
 	Value        string
@@ -51,8 +59,10 @@ type DictionaryItem struct {
 
 func (DictionaryItem) TableName() string { return "sys_dictionary_items" }
 
+func (d *DictionaryItem) BeforeCreate(*gorm.DB) error { return assignID(&d.ID) }
+
 type OperationLog struct {
-	ID         uint64 `gorm:"primaryKey"`
+	ID         uint64 `gorm:"primaryKey;autoIncrement:false"`
 	UserID     uint64
 	RequestID  string
 	Method     string
@@ -65,3 +75,5 @@ type OperationLog struct {
 }
 
 func (OperationLog) TableName() string { return "sys_operation_logs" }
+
+func (o *OperationLog) BeforeCreate(*gorm.DB) error { return assignID(&o.ID) }

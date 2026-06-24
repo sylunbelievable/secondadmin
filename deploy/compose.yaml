@@ -44,6 +44,7 @@ services:
       DB_READER_DSNS: ${DB_READER_DSNS:-}
       REDIS_ADDR: redis:6379
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+      ID_WORKER_ID: ${ID_WORKER_ID:-0}
       JWT_SECRET: ${JWT_SECRET}
       COOKIE_SECURE: "true"
     depends_on:

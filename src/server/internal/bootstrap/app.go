@@ -15,6 +15,7 @@ import (
 	"github.com/sylunbelievable/secondadmin/server/internal/config"
 	"github.com/sylunbelievable/secondadmin/server/internal/repository"
 	"github.com/sylunbelievable/secondadmin/server/internal/service"
+	"github.com/sylunbelievable/secondadmin/server/internal/snowflake"
 	irisTransport "github.com/sylunbelievable/secondadmin/server/internal/transport/iris"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
@@ -33,6 +34,10 @@ type App struct {
 }
 
 func New(ctx context.Context, cfg config.Config) (*App, error) {
+	if err := snowflake.Configure(cfg.ID.WorkerID); err != nil {
+		return nil, err
+	}
+
 	log, err := newLogger(cfg.Log)
 	if err != nil {
 		return nil, err

@@ -1,6 +1,6 @@
 -- +goose Up
 CREATE TABLE sys_users (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     username VARCHAR(64) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     nickname VARCHAR(100) NOT NULL DEFAULT '',
@@ -11,7 +11,7 @@ CREATE TABLE sys_users (
 );
 
 CREATE TABLE sys_roles (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     code VARCHAR(64) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     status SMALLINT NOT NULL DEFAULT 1,
@@ -20,7 +20,7 @@ CREATE TABLE sys_roles (
 );
 
 CREATE TABLE sys_apis (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     "group" VARCHAR(100) NOT NULL DEFAULT '',
     name VARCHAR(100) NOT NULL,
     path VARCHAR(255) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE sys_apis (
 );
 
 CREATE TABLE sys_login_logs (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     user_id BIGINT,
     username VARCHAR(64) NOT NULL,
     event VARCHAR(32) NOT NULL,
@@ -49,4 +49,3 @@ DROP TABLE sys_login_logs;
 DROP TABLE sys_apis;
 DROP TABLE sys_roles;
 DROP TABLE sys_users;
-

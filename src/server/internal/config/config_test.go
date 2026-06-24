@@ -56,3 +56,21 @@ func TestReadWriteSplittingRequiresReadersWhenEnabled(t *testing.T) {
 		t.Fatal("expected enabled read-write splitting to require readers")
 	}
 }
+
+func TestRejectsInvalidSnowflakeWorkerID(t *testing.T) {
+	cfg := Config{
+		Environment: "dev",
+		HTTP:        HTTP{Addr: ":8080", ShutdownTimeout: 10},
+		Database:    Database{Driver: "postgres", DSN: "writer"},
+		Redis:       Redis{Addr: "redis:6379"},
+		ID:          ID{WorkerID: 1024},
+		Auth: Auth{
+			JWTSecret:       "dev",
+			AccessTokenTTL:  1,
+			RefreshTokenTTL: 1,
+		},
+	}
+	if err := cfg.Validate(); err == nil {
+		t.Fatal("expected invalid snowflake worker id to fail")
+	}
+}

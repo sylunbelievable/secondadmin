@@ -16,6 +16,7 @@ import (
 	"github.com/sylunbelievable/secondadmin/server/internal/entity"
 	"github.com/sylunbelievable/secondadmin/server/internal/repository"
 	"github.com/sylunbelievable/secondadmin/server/internal/service"
+	"github.com/sylunbelievable/secondadmin/server/internal/snowflake"
 )
 
 func run() error {
@@ -30,6 +31,9 @@ func run() error {
 	}
 	cfg, err := config.Load()
 	if err != nil {
+		return err
+	}
+	if err = snowflake.Configure(cfg.ID.WorkerID); err != nil {
 		return err
 	}
 	db, sqlDB, err := bootstrap.OpenDatabase(context.Background(), cfg.Database)

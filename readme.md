@@ -130,6 +130,7 @@ DB_WRITER_DSN=
 DB_READER_DSNS=
 REDIS_ADDR=127.0.0.1:6379
 REDIS_PASSWORD=
+ID_WORKER_ID=0
 JWT_SECRET=
 COOKIE_SECURE=false
 ```
@@ -141,6 +142,10 @@ COOKIE_SECURE=false
 数据库默认单 DSN 运行，不启用读写分离。关闭时只配置 `database.dsn`/`DB_DSN`，不要把读库和写库
 重复填成同一个地址。开启读写分离时使用 GORM dbresolver：一个 writer、多个 readers；事务、Casbin
 策略和初始化脚本强制走 writer，普通查询/写入由 GORM 回调分发。
+
+业务表主键使用 JS 安全的雪花数字 ID；单实例默认 `ID_WORKER_ID=0`。多实例部署时必须为每个实例配置
+不同的 `0-1023` worker ID，避免同一秒内生成重复 ID。`casbin_rule` 保持 Casbin adapter 自己的
+自增主键。
 
 ```yaml
 database:
